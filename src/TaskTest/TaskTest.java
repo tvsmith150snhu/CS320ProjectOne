@@ -4,66 +4,60 @@ import Task.Task;
 import org.junit.Test;
 
 	public class TaskTest {
-		Task task = new Task ("123456789","Writing", "Write Code For Project");
-		//Test TaskID
-		//Tested 10 chars received pass, tested 11 received fail
+		Task task = new Task ("0123456789","Coding", "Prep Code in Project");
+		//TaskID Test
+		//Pass test with 10 chars, tested 11 received fail
 		//Tested null, received fail
-		
 		@Test
 		public void testTaskId() {
 			String validTaskId = "123456789";
 			task.setTaskID(validTaskId);
 			assertEquals(validTaskId, task.getTaskID());
 		}
-		//Test Illegal Exception For Task Id
 		
+		//Test Illegal Exception For Task Id
 		@Test
-		public void testTaskId2() {
+		public void testTaskIdBAD() {
 			try {
-				String validTaskId = "12345678912345";
+				String validTaskId = "01234567890123456789";
 				task.setTaskID(validTaskId);
 			} catch (IllegalArgumentException message) {
-				assertEquals("Invalid", message.getMessage());
+				assertEquals("Invalid ID", message.getMessage());
 			}
 		}
 		//Test Name
-		//Tested 20 chars received pass, tested 11 received fail
-		//Tested null, received fail
 		
 		@Test
 		public void testName() {
-			String validName = "Writing";
+			String validName = "Coding";
 			task.setTaskName(validName);
 			assertEquals(validName, task.getTaskName());
 		}
-		//Test Illegal Exception For name
 		
+		//Test illegal exception for name
 		@Test
-		public void testName2() {
+		public void testNameBAD() {
 			try {
 				String validName =
-						"Writinggggggggggggggggggggggggggggggggggggggggggg";
+						"Codinggggggggggggggggggggggggggggggggggggggggggg";
 				task.setTaskName(validName);
 			} catch (IllegalArgumentException message) {
 				assertEquals("Invalid", message.getMessage());
 			}
 		}
-		//Test Description
-		//Tested 50 chars received pass, tested 11 received fail
-		//Tested null, received fail
 		
+		//Test Description		
 		@Test
 		public void testDescription() {
-			String validDescription = "Write Code For Project";
+			String validDescription = "Prep Code in Project";
 			task.setTaskDesc(validDescription);
 			assertEquals(validDescription, task.getTaskDesc());
 		}
 		//Test Illegal Exception For Description
 		@Test
-		public void testDescription2() {
+		public void testDescriptionBAD() {
 			try {
-				String validDescription = "Write Code ForProjecttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt";
-						
+				String validDescription = "Prep Code in Projecttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt";		
 						task.setTaskDesc(validDescription);
 			} catch (IllegalArgumentException message) {
 				assertEquals("Invalid", message.getMessage());
