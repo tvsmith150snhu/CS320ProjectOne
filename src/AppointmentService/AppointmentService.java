@@ -27,7 +27,7 @@ import Appointment.Appointment;
 		public void deleteAppointment(String id) throws Exception {
 			appointmentList.remove(searchForAppointment(id));
 		}
-		protected List<Appointment> getAppointmentList() { return appointmentList; }
+		public List<Appointment> getAppointmentList() { return appointmentList; }
 		private Appointment searchForAppointment(String id) throws Exception {
 			int index = 0;
 			while (index < appointmentList.size()) {
