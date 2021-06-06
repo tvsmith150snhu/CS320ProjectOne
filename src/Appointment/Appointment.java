@@ -3,35 +3,35 @@ package Appointment;
 import java.util.Date;
 
 	public class Appointment {
-		final private byte APPOINTMENT_ID_LENGTH;
-		final private byte APPOINTMENT_DESCRIPTION_LENGTH;
-		final private String INITIALIZER;
-		private String appointmentId;
-		private Date appointmentDate;
-		private String description;
+		final public byte APPOINTMENT_ID_LENGTH;
+		final public byte APPOINTMENT_DESCRIPTION_LENGTH;
+		final public String INITIALIZER;
+		public String appointmentId;
+		public Date appointmentDate;
+		public String description;
 		{
 			APPOINTMENT_ID_LENGTH = 10;
 			APPOINTMENT_DESCRIPTION_LENGTH = 50;
 			INITIALIZER = "INITIAL";
 		}
-		Appointment() {
+		public Appointment() {
 			Date today = new Date();
 			appointmentId = INITIALIZER;
 			appointmentDate = today;
 			description = INITIALIZER;
 		}
-		Appointment(String id) {
+		public Appointment(String id) {
 			Date today = new Date();
 			updateAppointmentId(id);
 			appointmentDate = today;
 			description = INITIALIZER;
 		}
-		Appointment(String id, Date date) {
+		public Appointment(String id, Date date) {
 			updateAppointmentId(id);
 			updateDate(date);
 			description = INITIALIZER;
 		}
-		Appointment(String id, Date date, String description) {
+		public Appointment(String id, Date date, String description) {
 			updateAppointmentId(id);
 			updateDate(date);
 			updateDescription(description);
