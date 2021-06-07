@@ -8,8 +8,8 @@ import java.util.Map.Entry;
 import Contact.Contact;
 
 public class ContactService {
-	private static int uniqueId=2000;
-	   private static Map<Integer, Contact> contacts = new HashMap<>();
+	public static int uniqueId=2000;
+	   public static Map<Integer, Contact> contacts = new HashMap<>();
 	   
 	public Map<Integer, Contact> addContact(Contact contact) {
 	       uniqueId++;

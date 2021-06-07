@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.Test;
+import Contact.Contact;
+
 
 class ContactServiceTest {
 	protected String contactId, firstNameTest, lastNameTest, NumberTest,
@@ -79,7 +81,7 @@ class ContactServiceTest {
 			 ()
 			 -> assertEquals("INITIAL",
 			 service.getContactList().get(2).getAddress()));
-			 service.newContact(firstNameTest, lastNameTest, phoneNumberTest);
+			 service.newContact(firstNameTest, lastNameTest, NumberTest);
 			 assertAll(
 			 "service",
 			 ()
@@ -91,12 +93,12 @@ class ContactServiceTest {
 			 -> assertEquals(lastNameTest,
 			 service.getContactList().get(3).getLastName()),
 			 ()
-			 -> assertEquals(phoneNumberTest,
+			 -> assertEquals(NumberTest,
 			 service.getContactList().get(3).getPhoneNumber()),
 			 ()
 			 -> assertEquals("INITIAL",
 			 service.getContactList().get(3).getAddress()));
-			 service.newContact(firstNameTest, lastNameTest, phoneNumberTest,
+			 service.newContact(firstNameTest, lastNameTest, NumberTest,
 					 addressTest);
 					 assertAll(
 					 "service",
@@ -109,7 +111,7 @@ class ContactServiceTest {
 					 -> assertEquals(lastNameTest,
 					 service.getContactList().get(4).getLastName()),
 					 ()
-					 -> assertEquals(phoneNumberTest,
+					 -> assertEquals(NumberTest,
 					 service.getContactList().get(4).getPhoneNumber()),
 					 ()
 					 -> assertEquals(addressTest,
