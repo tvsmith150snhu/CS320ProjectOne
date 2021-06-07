@@ -47,6 +47,17 @@ import java.util.Date;
 				this.appointmentId = id;
 			}
 		}
+		public void updateDescription(String description) {
+			if (description == null) {
+				throw new IllegalArgumentException("Description cannot be null.");
+			} else if (description.length() > APPOINTMENT_DESCRIPTION_LENGTH) {
+				throw new IllegalArgumentException("Description cannot exceed " +
+						APPOINTMENT_DESCRIPTION_LENGTH +
+						" characters.");
+			} else {
+				this.description = description;
+			}
+		}
 		public String getAppointmentId() { return appointmentId; }
 		public void updateDate(Date date) {
 			if (date == null) {
