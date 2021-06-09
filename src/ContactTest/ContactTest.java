@@ -1,48 +1,195 @@
 package ContactTest;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import Contact.Contact;
 
-class ContactTest {
-
-	@Test
-	void testContact() {
-		Contact contact = new Contact("1", "Troy", "Smith", "0123456789", "012345678910111213141516171819");
-		assertTrue(contact.getcontactID().equals("1"));
-		assertTrue(contact.getfirstName().equals("Troy"));
-		assertTrue(contact.getlastName().equals("Smith"));
-		assertTrue(contact.getNumber().equals("0123456789"));
-		assertTrue(contact.getAddress().equals("123 Any Where, USA, TN. 12345"));
-	}
-	
-	@Test
-	void testContactContactIDTooLong() {
-		Assertions.assertThrows(IllegalArgumentException.class,() -> {
-			new Contact("01234567891", "Troy", "Smith", "0123456789", "012345678910111213141516171819");
-		});
-	}
-	void testContactContactFirstNameTooLong() {
-		Assertions.assertThrows(IllegalArgumentException.class,() -> {
-			new Contact("0123456789", "Troy Smith V", "Smith", "0123456789", "012345678910111213141516171819");
-		});
-	}
-	void testContactContactLastNameTooLong() {
-		Assertions.assertThrows(IllegalArgumentException.class,() -> {
-			new Contact("0123456789", "Troy", "Smith Troy V", "0123456789", "012345678910111213141516171819");
-		});
-	}
-	void testContactContactNumberTooLong() {
-		Assertions.assertThrows(IllegalArgumentException.class,() -> {
-			new Contact("0123456789", "Troy", "Smith", "01234567891", "012345678910111213141516171819");
-		});
-	}
-	void testContactContactAddressTooLong() {
-		Assertions.assertThrows(IllegalArgumentException.class,() -> {
-			new Contact("0123456789", "Troy", "Smith", "0123456789", "0123456789101112131415161718192");
-		});
-	}
-}
+public class ContactTest {
+ protected String contactId, firstNameTest, lastNameTest, phoneNumberTest,
+ addressTest;
+ protected String tooLongContactId, tooLongFirstName, tooLongLastName,
+ tooLongPhoneNumber, tooShortPhoneNumber, tooLongAddress;
+ @BeforeEach
+ void setUp() {
+ contactId = "1029F847A6";
+ firstNameTest = "John";
+ lastNameTest = "Smith";
+ phoneNumberTest = "5553331234";
+ addressTest = "1 Audrey Jersey City NJ 07305";
+ tooLongContactId = "112233445566778899";
+ tooLongFirstName = "John Jacob Jingle";
+ tooLongLastName = "-heimer Schmidt";
+ tooLongPhoneNumber = "55512341234";
+ tooShortPhoneNumber = "1234567";
+ tooLongAddress = "1 Audrey Zapp Drive, Jersey City, NJ 07305";
+ }
+ @Test
+ void contactTest() {
+ Contact contact = new Contact();
+ assertAll("constructor",
+ ()
+ -> assertNotNull(contact.getContactId()),
+ ()
+ -> assertNotNull(contact.getFirstName()),
+ ()
+ -> assertNotNull(contact.getLastName()),
+ ()
+ -> assertNotNull(contact.getPhoneNumber()),
+ () -> assertNotNull(contact.getAddress()));
+ }
+ @Test
+ void contactIdConstructorTest() {
+ Contact contact = new Contact(contactId);
+ assertAll("constructor one",
+ ()
+ -> assertEquals(contactId, contact.getContactId()),
+ ()
+ -> assertNotNull(contact.getFirstName()),
+ ()
+ -> assertNotNull(contact.getLastName()),
+ ()
+ -> assertNotNull(contact.getPhoneNumber()),
+ () -> assertNotNull(contact.getAddress()));
+ }
+ @Test
+ void contactIdAndFirstNameConstructorTest() {
+ Contact contact = new Contact(contactId, firstNameTest);
+ assertAll("constructor two",
+ ()
+ -> assertEquals(contactId, contact.getContactId()),
+ ()
+ -> assertEquals(firstNameTest, contact.getFirstName()),
+ ()
+ -> assertNotNull(contact.getLastName()),
+ ()
+ -> assertNotNull(contact.getPhoneNumber()),
+ () -> assertNotNull(contact.getAddress()));
+ }
+ @Test
+ void contactIdAndFullNameConstructorTest() {
+ Contact contact = new Contact(contactId, firstNameTest, lastNameTest);
+ assertAll("constructor three",
+ ()
+ -> assertEquals(contactId, contact.getContactId()),
+ ()
+ -> assertEquals(firstNameTest, contact.getFirstName()),
+ ()
+ -> assertEquals(lastNameTest, contact.getLastName()),
+ ()
+ -> assertNotNull(contact.getPhoneNumber()),
+ () -> assertNotNull(contact.getAddress()));
+ }
+ @Test
+ void contactIdFullNamePhoneNumberConstructorTest() {
+ Contact contact =
+ new Contact(contactId, firstNameTest, lastNameTest, phoneNumberTest);
+ assertAll("constructor four",
+ ()
+ -> assertEquals(contactId, contact.getContactId()),
+ ()
+ -> assertEquals(firstNameTest, contact.getFirstName()),
+ ()
+ -> assertEquals(lastNameTest, contact.getLastName()),
+ ()
+ -> assertEquals(phoneNumberTest, contact.getPhoneNumber()),
+ () -> assertNotNull(contact.getAddress()));
+ }
+ @Test
+ void allTheProperThingsConstructorTest() {
+ Contact contact = new Contact(contactId, firstNameTest, lastNameTest,
+ phoneNumberTest, addressTest);
+ assertAll("constructor all",
+ ()
+ -> assertEquals(contactId, contact.getContactId()),
+ ()
+ -> assertEquals(firstNameTest, contact.getFirstName()),
+ ()
+ -> assertEquals(lastNameTest, contact.getLastName()),
+ ()
+ -> assertEquals(phoneNumberTest, contact.getPhoneNumber()),
+ () -> assertEquals(addressTest, contact.getAddress()));
+ }
+ @Test
+ void updateFirstNameTest() {
+ Contact contact = new Contact();
+ contact.updateFirstName(firstNameTest);
+ assertAll(
+ "first name",
+ ()
+ -> assertEquals(firstNameTest, contact.getFirstName()),
+ ()
+ -> assertThrows(IllegalArgumentException.class,
+		 () -> contact.updateFirstName(null)),
+		 ()
+		 -> assertThrows(IllegalArgumentException.class,
+		 () -> contact.updateFirstName(tooLongFirstName)));
+		 }
+		 @Test
+		 void updateLastNameTest() {
+		 Contact contact = new Contact();
+		 contact.updateLastName(lastNameTest);
+		 assertAll(
+		 "last name",
+		 ()
+		 -> assertEquals(lastNameTest, contact.getLastName()),
+		 ()
+		 -> assertThrows(IllegalArgumentException.class,
+		 () -> contact.updateLastName(null)),
+		 ()
+		 -> assertThrows(IllegalArgumentException.class,
+		 () -> contact.updateLastName(tooLongFirstName)));
+		 }
+		 @Test
+		 void updatePhoneNumberTest() {
+		 Contact contact = new Contact();
+		 contact.updatePhoneNumber(phoneNumberTest);
+		 assertAll("phone number",
+		 ()
+		 -> assertEquals(phoneNumberTest, contact.getPhoneNumber()),
+		 ()
+		 -> assertThrows(IllegalArgumentException.class,
+		 () -> contact.updatePhoneNumber(null)),
+		 ()
+		 -> assertThrows(
+		 IllegalArgumentException.class,
+		 () -> contact.updatePhoneNumber(tooLongPhoneNumber)),
+		 ()
+		 -> assertThrows(
+		 IllegalArgumentException.class,
+		 () -> contact.updatePhoneNumber(tooShortPhoneNumber)),
+		 ()
+		 -> assertThrows(IllegalArgumentException.class,
+		 () -> contact.updatePhoneNumber(contactId)));
+		 }
+		 @Test
+		 void updateAddressTest() {
+		 Contact contact = new Contact();
+		 contact.updateAddress(addressTest);
+		 assertAll("phone number",
+		 ()
+		 -> assertEquals(addressTest, contact.getAddress()),
+		 ()
+		 -> assertThrows(IllegalArgumentException.class,
+		 () -> contact.updateAddress(null)),
+		 ()
+		 -> assertThrows(IllegalArgumentException.class,
+		 () -> contact.updateAddress(tooLongAddress)));
+		 }
+		 @Test
+		 void updateContactIdTest() {
+		 Contact contact = new Contact();
+		 contact.updateContactId(contactId);
+		 assertAll(
+		 "contact ID",
+		 ()
+		 -> assertEquals(contactId, contact.getContactId()),
+		 ()
+		 -> assertThrows(IllegalArgumentException.class,
+		 () -> contact.updateContactId(null)),
+		 ()
+		 -> assertThrows(IllegalArgumentException.class,
+		 () -> contact.updateContactId(tooLongContactId)));
+		 }
+		}
