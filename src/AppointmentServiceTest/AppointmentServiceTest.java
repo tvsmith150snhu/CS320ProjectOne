@@ -1,77 +1,51 @@
 package AppointmentServiceTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 import java.util.Calendar;
 import java.util.Date;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import AppointmentService.AppointmentService;
+import org.junit.Test;
 
-	class AppointmentServiceTest {
-		private String id, description, tooLongDescription;
-		private Date date, pastDate;
+import Appointment.Appointment;
+import AppointmentService.AppointmentService;;
 
-		@SuppressWarnings("deprecation")
-
-		@BeforeEach
-		void setUp() {
-			id = "1234567890";
-			description = "The appt object shall have a required description.";
-			date = new Date(3021, Calendar.JANUARY, 1);
-			tooLongDescription = "This description is too long for the appointment requirements but good for testing.";
-			pastDate = new Date(0);
-		}
-		
-		@Test
-		void testNewAppointment() {
-			AppointmentService service = new AppointmentService();
-			service.newAppointment();
-			assertNotNull(service.getAppointmentList().get(0).getAppointmentId());
-			assertNotNull(service.getAppointmentList().get(0).getAppointmentDate());
-			assertNotNull(service.getAppointmentList().get(0).getDescription());
-			service.newAppointment(date);
-			assertNotNull(service.getAppointmentList().get(1).getAppointmentId());
-			assertEquals(date,
-					service.getAppointmentList().get(1).getAppointmentDate());
-			assertNotNull(service.getAppointmentList().get(1).getDescription());
-			service.newAppointment(date, description);
-			assertNotNull(service.getAppointmentList().get(2).getAppointmentId());
-			assertEquals(date,
-					service.getAppointmentList().get(2).getAppointmentDate());
-			assertEquals(description,
-					service.getAppointmentList().get(2).getDescription());
-			assertNotEquals(service.getAppointmentList().get(0).getAppointmentId(),
-					service.getAppointmentList().get(1).getAppointmentId());
-			assertNotEquals(service.getAppointmentList().get(0).getAppointmentId(),
-					service.getAppointmentList().get(2).getAppointmentId());
-			assertNotEquals(service.getAppointmentList().get(1).getAppointmentId(),
-					service.getAppointmentList().get(2).getAppointmentId());
-			assertThrows(IllegalArgumentException.class,
-					() -> service.newAppointment(pastDate));
-			assertThrows(IllegalArgumentException.class,
-					() -> service.newAppointment(date, tooLongDescription));
-		}
-		
-		@Test
-		void deleteAppointment() throws Exception {
-			AppointmentService service = new AppointmentService();
-			service.newAppointment();
-			service.newAppointment();
-			service.newAppointment();
-			String firstId = service.getAppointmentList().get(0).getAppointmentId();
-			String secondId = service.getAppointmentList().get(1).getAppointmentId();
-			String thirdId = service.getAppointmentList().get(2).getAppointmentId();
-			assertNotEquals(firstId, secondId);
-			assertNotEquals(firstId, thirdId);
-			assertNotEquals(secondId, thirdId);
-			assertNotEquals(id, firstId);
-			assertNotEquals(id, secondId);
-			assertNotEquals(id, thirdId);
-			assertThrows(Exception.class, () -> service.deleteAppointment(id));
-			service.deleteAppointment(firstId);
-			assertThrows(Exception.class, () -> service.deleteAppointment(firstId));
-			assertNotEquals(firstId,
-			service.getAppointmentList().get(0).getAppointmentId());
-			}
-	}
-
+public class AppointmentServiceTest {
+Date date = new Date(2021, Calendar.FEBRUARY, 19);
+//Received pass on this testing case
+//Tested to verify if appointment is added
+ @Test
+ public void addApptTest() {
+ AppointmentService appointmentService = new AppointmentService
+("123456789", date, "Scheduled");
+ assertEquals(true,AppointmentService.addAppt("123456789",date,
+"Scheduled"));
+ }
+//Second version of code testing to add appointment
+//Received pass
+ @Test
+ public void addApptTest2() {
+ AppointmentService appointmentService = new AppointmentService
+("123456789", date, "Scheduled");
+ boolean result = appointmentService.addAppt("123456789", date,
+"Scheduled");
+ assertTrue(result);
+ }
+ //Test to delete appointment per ID
+ //Received pass
+ @Test
+ public void deleteApptTest() {
+ AppointmentService appointmentService = new AppointmentService
+("123456789", date, "Scheduled");
+ Appointment a = appointmentService.deleteAppt("123456789");
+ assertTrue(a == null);
+ }
+ //Test to delete appointment per ID
+ @Test
+ public void deleteApptTest2() {
+ AppointmentService appointmentService = new AppointmentService
+("123456789", date, "Scheduled");
+ boolean result = appointmentService.addAppt("123456789", date,
+"Scheduled");
+ Appointment a = appointmentService.deleteAppt("123456789");
+ assertTrue(a != null);
+ }
+}
