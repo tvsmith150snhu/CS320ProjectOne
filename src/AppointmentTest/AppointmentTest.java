@@ -50,13 +50,13 @@ import Appointment.Appointment;;
 			assertThrows(IllegalArgumentException.class,
 					() -> appt.updateDate(pastDate));
 			appt.updateDate(date);
-			assertEquals(date, appt.getAppointmentDate());
+			assertEquals(date, appt.getAppointmentId());
 		}
 		@Test
 		void testGetAppointmentDate() {
 			Appointment appt = new Appointment(id, date);
-			assertNotNull(appt.getAppointmentDate());
-			assertEquals(date, appt.getAppointmentDate());
+			assertNotNull(appt.getAppointmentId());
+			assertEquals(date, appt.getAppointmentId());
 		}
 		
 		@Test
@@ -74,7 +74,7 @@ import Appointment.Appointment;;
 		void testGetDescription() {
 			Appointment appt = new Appointment(id, date, description);
 			assertNotNull(appt.getDescription());
-			assertTrue(appt.getDescription().length() <= 50);
+			assertTrue(((String) appt.getDescription()).length() <= 50);
 			assertEquals(description, appt.getDescription());
 		}
 	}

@@ -68,4 +68,7 @@ import java.util.Date;
 			} else {
 			}	
 		}
+		public Object getDescription() {
+			return null;
+		}
 	}
