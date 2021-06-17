@@ -57,3 +57,23 @@ ContactServiceTest.java
 
 # What skills from this project will be particularly transferable to other projects and/or course work?
   I think I will use JUnit testing in all of my personal, work and academic endeavors.
+  
+# How can I ensure that my code, program, or software is functional and secure?
+  Functional white box testing techniques were utilized to test the code in each of the milestones.  Testing assured that each string of data requested in the milestones met the specifications required, such as the length of the object.  For example the Contact specifications required the first name to not be null and not greater than 10 characters.  The code first checked within the constructor with conditional statements for the flow of specific inputs through the code:
+
+if(firstName == null || firstName.length()>10) {
+            throw new IllegalArgumentException("Invalid First Name");
+
+ JUnit testing then provided white box testing with examples of the correct sample and an incorrect sample to test the expected output:
+void testContactContactFirstNameTooLong() {
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            new Contact("0123456789", "Troy Smith V", "Smith", "0123456789", "012345678910111213141516171819");
+        });
+
+Code coverage analysis is used to identify areas of the program that are not exercised by a set of test cases.  Statement Coverage is used to test each code statement to be tested at least once in the process, while branch coverage tests the paths or if-else and other conditional loops of the application.
+
+# How do I interpret user needs and incorporate them into a program?
+ Throughout this project while acting as a software tester, I employed caution to the extent of rereading the requirements of each assignment to be sure not to miss any detail and include all the necessary components.  For example, while creating the Contact requirements, I was cautious to be sure the Contact ID, first name, and last name were not null and no longer than 10 characters and that the phone number was not null and exactly 10 characters in length and that the address was not null and no longer than 30 characters.  
+
+# How do I approach designing software?
+As a software engineering professional, being disciplined in commitment to quality code is paramount.  This mandates that corners must not be cut and absolute concentration on minute details must be taken to prevent bugs or defects that may result in rework of the code.  Quality tests should be constructed to maintain code testing throughout the lifespan of the application to ensure further testing and grow the product without missing flaws.  This may be accomplished by researching the tests of others and learning from and improving upon their work in a collaborative and every growing mindset.  Technical debt will then be reduced as I move forward and learn from my peers and those who have traveled this path before me.
